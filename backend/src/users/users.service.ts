@@ -6,11 +6,13 @@ import { LoginUserDTO, RegisterUserDTO } from './users.dto';
 import { User } from './users.entity';
 import { AuthResponseModel } from './users.model';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+    private jwtService: JwtService,
   ) {}
 
   async register(
@@ -35,7 +37,9 @@ export class UsersService {
     const { password, password_confirmation, ...userSaved } =
       await this.userRepository.save(user);
 
-    return userSaved;
+    return {
+      access_token: this.jwtService.sign(userSaved),
+    };
   }
 
   async login(user: LoginUserDTO): Promise<AuthResponseModel> {
@@ -55,7 +59,9 @@ export class UsersService {
     // borrar password
     const { password, ...userSaved } = userExists;
 
-    return userSaved;
+    return {
+      access_token: this.jwtService.sign(userSaved),
+    };
   }
 
   async findUserByNi(ni: string): Promise<User> {
