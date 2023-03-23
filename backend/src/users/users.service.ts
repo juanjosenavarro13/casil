@@ -17,7 +17,7 @@ export class UsersService {
     user: RegisterUserDTO,
   ): Promise<AuthResponseModel | HttpException> {
     // validar si el usuario ya existe
-    const userExists = await this.findUserByName(user.username);
+    const userExists = await this.findUserByNi(user.ni);
     if (userExists) {
       throw new HttpException('El usuario ya existe.', 400);
     }
@@ -40,7 +40,7 @@ export class UsersService {
 
   async login(user: LoginUserDTO): Promise<AuthResponseModel> {
     // validar si el usuario existe
-    const userExists = await this.findUserByName(user.username);
+    const userExists = await this.findUserByNi(user.ni);
     if (!userExists) {
       throw new HttpException('El usuario no existe.', 400);
     }
@@ -58,54 +58,7 @@ export class UsersService {
     return userSaved;
   }
 
-  async findUserByName(username: string): Promise<User> {
-    return this.userRepository.findOne({ where: { username } });
-  }
-
-  async getProfile(id: number): Promise<AuthResponseModel | HttpException> {
-    const user = await this.userRepository.findOne({ where: { id } });
-    if (!user) {
-      throw new HttpException('El usuario no existe.', 404);
-    }
-    return user;
-  }
-
-  async updateProfile(id: number, updateData) {
-    const user = await this.userRepository.findOne({ where: { id } });
-    if (!user) {
-      throw new HttpException('El usuario no existe.', 404);
-    }
-
-    // actualizar usuario
-    user.username = updateData.username;
-
-    if (updateData.password && updateData.password_confirmation) {
-      // validar que las contraseñas coincidan
-      if (updateData.password !== updateData.password_confirmation) {
-        throw new HttpException('Las contraseñas no coinciden.', 400);
-      }
-
-      // encriptar password
-      const hashPassword = await bcrypt.hash(updateData.password, 10);
-      user.password = hashPassword;
-    }
-
-    this.userRepository.save(user);
-
-    const updatedUser = await this.userRepository.findOne({ where: { id } });
-    delete updatedUser.password;
-    return updatedUser;
-  }
-
-  async countUsers(): Promise<number> {
-    const users = await this.userRepository.find();
-    return users.length;
-  }
-
-  async validateUser(user: AuthResponseModel): Promise<boolean> {
-    const userValidated = await this.userRepository.findOne({
-      where: { id: user.id, username: user.username },
-    });
-    return !!userValidated;
+  async findUserByNi(ni: string): Promise<User> {
+    return this.userRepository.findOne({ where: { ni } });
   }
 }
