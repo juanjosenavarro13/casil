@@ -6,6 +6,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
+import { UsersAdminGuard } from './users.admin.guard';
 import { UsersAuthGuard } from './users.auth.guard';
 import { LoginUserDTO, RegisterUserDTO } from './users.dto';
 import { AuthResponseModel } from './users.model';
@@ -17,6 +18,7 @@ export class UsersController {
 
   @Post('register')
   @UseGuards(UsersAuthGuard)
+  @UseGuards(UsersAdminGuard)
   registerUser(
     @Body() user: RegisterUserDTO,
   ): Promise<AuthResponseModel | HttpException> {
