@@ -1,0 +1,62 @@
+<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      aria-current="page"
+      routerLink="/users/profile"
+      routerLinkActive="active"
+      >Perfil</a
+    >
+  </li>
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      aria-current="page"
+      role="button"
+      data-bs-toggle="modal"
+      data-bs-target="#modalLogout"
+      >Salir</a
+    >
+  </li>
+</ul>
+
+<!-- Modal logout -->
+<div
+  class="modal fade"
+  id="modalLogout"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          ¿Estas seguro que quieres cerrar sesion?
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Si cierras sesión perderás el acceso de la aplicación.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-dark"
+          data-bs-dismiss="modal"
+          (click)="logout()"
+        >
+          Si
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

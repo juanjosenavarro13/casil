@@ -1,0 +1,34 @@
+<div class="card mb-3">
+  <div class="card-body text-center">
+    <img
+      src="../../../assets/images/icon.png"
+      loading="lazy"
+      alt="{{ infoConstants.title }}"
+      width="100"
+      height="100"
+    />
+    <h2 class="display-6">{{ infoConstants.title }}</h2>
+  </div>
+</div>
+<div class="card" *ngIf="info | async as info">
+  <div class="card-body text-center">
+    <h2 class="display-6">Informacion</h2>
+    <div class="row">
+      <app-info-count
+        class="col-3"
+        title="Usuarios"
+        [count]="info.usuarios"
+      ></app-info-count>
+      <app-info-count
+        class="col-3"
+        title="Socios"
+        [count]="info.socios"
+      ></app-info-count>
+      <app-info-count
+        class="col-3"
+        title="Productos"
+        [count]="info.productos"
+      ></app-info-count>
+    </div>
+  </div>
+</div>

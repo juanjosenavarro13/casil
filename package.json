@@ -1,0 +1,21 @@
+{
+  "name": "casil",
+  "version": "1.0.0",
+  "author": "Juan José Navarro Perea",
+  "description": "",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "start:front": "npm run start --workspace=frontend",
+    "start:back": "npm run start:dev --workspace=backend",
+    "build:front": "npm run build --workspace=frontend",
+    "lint": "npm run lint --workspace=frontend && npm run lint --workspace=backend"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "engines": {
+    "node": "16.14.2"
+  }
+}

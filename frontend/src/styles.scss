@@ -1,0 +1,19 @@
+// select
+$form-select-focus-box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
+$form-select-focus-border-color:  black;
+
+
+// input
+$input-focus-box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
+$input-focus-border-color: tint-color(black, 50%);
+
+// close button
+$btn-close-focus-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
+
+// accordion
+$accordion-button-active-bg: #212529;
+$accordion-button-active-color:white;
+$accordion-button-focus-box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
+
+// styles.scss
+@import "../../node_modules/bootstrap/scss/bootstrap.scss"

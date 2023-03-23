@@ -1,0 +1,45 @@
+<div class="container text-center">
+  <app-alert
+    *ngIf="update"
+    message="Usuario actualizado correctamente."
+    color="success"
+  ></app-alert>
+
+  <form [formGroup]="profileForm" (ngSubmit)="submit()">
+    <h5 class="display-6">Perfil de usuario de: {{ username }}</h5>
+    <div class="form-floating mb-3">
+      <input
+        autocomplete="username"
+        type="text"
+        class="form-control"
+        id="usernameInput"
+        formControlName="username"
+        [value]="profileForm.value.username"
+      />
+      <label for="usernameInput">Usuario</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        autocomplete="current-password"
+        type="password"
+        class="form-control"
+        id="passwordInput"
+        formControlName="password"
+      />
+      <label for="passwordInput">Contraseña</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        autocomplete="current-password"
+        type="password"
+        class="form-control"
+        id="passwordConfirmationInput"
+        formControlName="password_confirmation"
+      />
+      <label for="passwordConfirmationInput">Confirmar contraseña</label>
+    </div>
+    <button class="btn btn-dark" [disabled]="!profileForm.valid">
+      Actualizar
+    </button>
+  </form>
+</div>

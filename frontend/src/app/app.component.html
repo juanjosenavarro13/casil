@@ -1,0 +1,12 @@
+<ng-container *ngIf="login; else loginTemplate">
+  <app-header></app-header>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+</ng-container>
+
+<ng-template #loginTemplate>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</ng-template>
